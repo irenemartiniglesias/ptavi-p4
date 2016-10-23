@@ -13,6 +13,7 @@ LINE = ' '.join(sys.argv[3:])
 
 
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as my_socket: 
+
     my_socket.connect((SERVER, PORT))
     print("Enviando:", LINE)
     my_socket.send(bytes(LINE, 'utf-8') + b'\r\n') 
