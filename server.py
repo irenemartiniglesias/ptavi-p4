@@ -8,19 +8,46 @@ import socketserver
 import sys
 
 
-class EchoHandler(socketserver.DatagramRequestHandler):
+def register (line_decod, dicc_usuarios, dicc, client_infor):
+    """
+    Registro de usuarios
+    """
+    sip = line_decod.split()[1]
+    direccion = sip.split('sip:')[0]
+    dicc_usuarios['address'] = client_infor[0]
+
+    if direccion in dicc:
+        dicc[direccion]
+    elif '@' in direccion:
+        dicc[direccion] = dicc_usuarios
+    
+    for usuario in dicc:
+        dicc[direccion]
+
+class SIPRegisterHandler(socketserver.DatagramRequestHandler):
     """
     Echo server class
     """
 
+    dicc = {}
+
+
     def handle(self):
-        self.wfile.write(b"Hemos recibido tu peticion")
-        print(self.client_address)
-        for line in self.rfile:
-            print("El cliente nos manda ", line.decode('utf-8'))
+
+        dicc_usuarios = {}
+        client_infor = self.client_address
+        while 1:
+            line = self.rfile.read()
+            line_decod = line.decode('utf-8')
+            if len(line_decod) >= 1:
+                if line_decod.split()[0].upper() == 'REGISTER':
+                    register(line_decod, dicc_usuarios, self.dicc, client_infor)
+                    self.wfile.write(b"SIP/2.0 200 OK\r\n\r\n")
+        print("El cliente nos manda " + line_decod)
+
 
 if __name__ == "__main__":
-    serv = socketserver.UDPServer(("", int(sys.argv[1])), EchoHandler)
+    serv = socketserver.UDPServer(("", int(sys.argv[1])), SIPRegisterHandler)
     print("Lanzando servidor UDP de eco...")
     try:
         serv.serve_forever()
