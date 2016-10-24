@@ -7,13 +7,14 @@ Programa cliente UDP simple
 import socket
 import sys
 
-#Información del servidor
+#Información del servidor.
 SERVER = sys.argv[1]
 PORT = int(sys.argv[2])
 
-#Lo que vamos a enviar
+#Lo que vamos a enviar.
 LISTA = sys.argv[3:]
 LINE = ' '.join(LISTA)
+
 
 if LINE.split()[0] == 'REGISTER':
 	if len(sys.argv) != 6:
@@ -23,6 +24,7 @@ sip_address expires_value")
 		Line_sip = " sip:" + LINE.split()[1] + ' SIP/2.0\r\n'
 		Line_Expires = "Expires: " + LINE.split()[2] + '\r\n'
 		LINE = "REGISTER" + Line_sip + Line_Expires
+		
 
 #creacion y configuracion del socket
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as my_socket: 
