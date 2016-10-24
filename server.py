@@ -64,7 +64,7 @@ class SIPRegisterHandler(socketserver.DatagramRequestHandler):
 
             if not line:
                 break
-       
+ 
     def register2json(self):
         """
         Registro de los usuarios en un json
