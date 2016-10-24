@@ -29,6 +29,7 @@ def register (line_decod, dicc_usuarios, dicc, client_infor):
  
     dicc_usuarios["expira"] = strf_expira + ' + ' + str(expiracion)
 
+#casos para que borre la direccion del fichero
     if expiracion == 0:
         if direccion in dicc:
             del dicc[direccion]
