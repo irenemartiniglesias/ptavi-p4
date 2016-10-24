@@ -74,6 +74,17 @@ class SIPRegisterHandler(socketserver.DatagramRequestHandler):
             json.dump(self.dicc, fichero_json, sort_keys = True, indent = 4)
 
 
+    def json2register(self):
+        """
+        Comprobacion de si existe el fichero json
+        """
+        fichero_json = 'registro.json'
+        try:
+            sself.dicc = json.loads(open(fichero_json).read())
+        except:
+            self.dicc = {}
+
+
 if __name__ == "__main__":
     serv = socketserver.UDPServer(("", int(sys.argv[1])), SIPRegisterHandler)
     print("Lanzando servidor UDP de eco...")
