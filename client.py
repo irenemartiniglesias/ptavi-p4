@@ -18,7 +18,7 @@ LINE = ' '.join(LISTA)
 if LINE.split()[0] == 'REGISTER':
 	if len(sys.argv) != 6:
 		sys.exit("Usuage: client.py ip puerto register \
-		         sip_address expires_value")
+sip_address expires_value")
 	if '@' in LINE.split ()[1]:
 		Line_sip = " sip:" + LINE.split()[1] + ' SIP/2.0\r\n'
 		Line_Expires = "Expires: " + LINE.split()[2] + '\r\n'
